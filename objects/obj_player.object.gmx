@@ -25,7 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed_x = 0;
+            <string>//constants
+accel = 1;
+deccel = 0.5;
+max_speed_x = 3;
+jump_speed = -7;
+jump_reduce = 2;
+max_grav = 0.5;
+max_speed_y = 8;
+
+//variables
+speed_x = 0;
 speed_y = 0;
 facing = 1;
 sprite = spr_person;
@@ -124,15 +134,15 @@ if (!obj_control.sacrifice) {
     }
     else {
         if (keyboard_check(vk_left))
-            speed_x -= 1;
+            speed_x -= accel;
         if (keyboard_check(vk_right))
-            speed_x += 1;
+            speed_x += accel;
         if (abs(speed_x) &gt; 0) {
             facing = sign(speed_x);
-            speed_x -= sign(speed_x) * 0.5;
+            speed_x -= sign(speed_x) * deccel;
         }
-        if (abs(speed_x) &gt; 3)
-            speed_x = sign(speed_x) * 3;
+        if (abs(speed_x) &gt; max_speed_x)
+            speed_x = sign(speed_x) * max_speed_x;
             
         if (keyboard_check_pressed(vk_up)) {
             if (place_free(x, y + 1)) {
@@ -146,22 +156,22 @@ if (!obj_control.sacrifice) {
             }
             else {
                 audio_play_sound(snd_jump, 0, false);
-                speed_y = -7;
+                speed_y = jump_speed;
             }
         }
         if (keyboard_check_released(vk_up) &amp;&amp; speed_y &lt; 0)
-            speed_y /= 2;
+            speed_y /= jump_reduce;
             
         if (place_free(x, y + 1))
-            grav = 0.5;
+            grav = max_grav;
         else {
             grav = 0;
             can_dash = true;
         }
             
         speed_y += grav;
-        if (speed_y &gt; 8)
-            speed_y = 8; 
+        if (speed_y &gt; max_speed_y)
+            speed_y = max_speed_y; 
             
         var move_x = round(speed_x);
         var move_y = round(speed_y);
