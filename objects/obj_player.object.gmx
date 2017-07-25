@@ -29,8 +29,8 @@
 accel = 1;
 deccel = 0.5;
 max_speed_x = 3;
-jump_speed = -7;
-jump_reduce = 2;
+jump_speed = -7.5;
+jump_reduce = 2.3;
 max_grav = 0.5;
 max_speed_y = 8;
 
