@@ -99,7 +99,23 @@ inv = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>inv--;
+            <string>var left_held = false;
+var right_held = false;
+var jump_pressed = false;
+var jump_released = false;
+var whip_pressed = false;
+var shoot_pressed = false;
+var hook_pressed = false;
+
+left_held = keyboard_check(vk_left);
+right_held = keyboard_check(vk_right);
+jump_pressed = keyboard_check_pressed(vk_up);
+jump_released = keyboard_check_released(vk_up);
+whip_pressed = keyboard_check_pressed(ord('A'));
+shoot_pressed = keyboard_check_pressed(ord('S'));
+hook_pressed = keyboard_check_pressed(ord('D'));
+
+inv--;
 if (inv &lt; 0)
     inv = 0;
 
@@ -130,12 +146,12 @@ if (!obj_control.sacrifice) {
             move_contact_solid(90 - facing * 90, 12);
             dash = 0;
         }
-        dash -= 1;
+            dash -= 1;
     }
     else {
-        if (keyboard_check(vk_left))
+        if (left_held)
             speed_x -= accel;
-        if (keyboard_check(vk_right))
+        if (right_held)
             speed_x += accel;
         if (abs(speed_x) &gt; 0) {
             facing = sign(speed_x);
@@ -144,7 +160,7 @@ if (!obj_control.sacrifice) {
         if (abs(speed_x) &gt; max_speed_x)
             speed_x = sign(speed_x) * max_speed_x;
             
-        if (keyboard_check_pressed(vk_up)) {
+        if (jump_pressed) {
             if (place_free(x, y + 1)) {
                 if (can_dash &amp;&amp; scr_check_item("Dash Boots")) {
                     audio_play_sound(snd_dash, 0, false);
@@ -159,7 +175,7 @@ if (!obj_control.sacrifice) {
                 speed_y = jump_speed;
             }
         }
-        if (keyboard_check_released(vk_up) &amp;&amp; speed_y &lt; 0)
+        if (jump_released &amp;&amp; speed_y &lt; 0)
             speed_y /= jump_reduce;
             
         if (place_free(x, y + 1))
@@ -193,21 +209,21 @@ if (!obj_control.sacrifice) {
         }
         
         if (!place_free(x, y + 1)) {
-            if (keyboard_check_pressed(ord('A')) &amp;&amp; scr_check_item("Whip")) {
+            if (whip_pressed &amp;&amp; scr_check_item("Whip")) {
                 audio_play_sound(snd_whip, 0, false);
                 var whip_hb = instance_create(x, y, obj_whip);
                 whip_hb.image_xscale = facing;
                 whip = 6;
                 speed_x = 0;
             }
-            if (keyboard_check_pressed(ord('S')) &amp;&amp; scr_check_item("Gun")) {
+            if (shoot_pressed &amp;&amp; scr_check_item("Gun")) {
                 audio_play_sound(snd_shoot, 0, false);
                 var bullet = instance_create(x + facing * 8, y - 4, obj_bullet);
                 bullet.facing = facing;
                 shoot = 4;
                 speed_x = 0;
             }
-            else if (keyboard_check_pressed(ord('D')) &amp;&amp; scr_check_item("Grappling Hook")) {
+            else if (hook_pressed &amp;&amp; scr_check_item("Grappling Hook")) {
                 audio_play_sound(snd_hook, 0, false);
                 instance_create(x, y - 8, obj_hook);
                 speed_x = 0;

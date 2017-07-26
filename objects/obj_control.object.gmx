@@ -92,20 +92,30 @@ sac_name = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sac_msg -= 0.01;
+            <string>var left_pressed = false;
+var right_pressed = false;
+var confirm_pressed = false;
+var exit_pressed = false;
+
+left_pressed = keyboard_check_pressed(vk_left);
+right_pressed = keyboard_check_pressed(vk_right);
+confirm_pressed = keyboard_check_pressed(ord('A'));
+exit_pressed = keyboard_check_pressed(vk_escape);
+
+sac_msg -= 0.01;
 if (sac_msg &lt; 0)
 sac_msg = 0;
 
 if (sacrifice) {
-    if (keyboard_check_pressed(vk_left) &amp;&amp; selected &gt; 0) {
+    if (left_pressed &amp;&amp; selected &gt; 0) {
         audio_play_sound(snd_select, 0, false);
         selected--;
     }
-    if (keyboard_check_pressed(vk_right) &amp;&amp; selected &lt; ds_list_size(item_list) - 1) {
+    if (right_pressed &amp;&amp; selected &lt; ds_list_size(item_list) - 1) {
         audio_play_sound(snd_select, 0, false);
         selected++;
     }
-    if (keyboard_check_pressed(ord('A'))) {
+    if (confirm_pressed) {
         audio_stop_sound(snd_curse_music);
         audio_play_sound(snd_confirm, 0, false);
         sacrifices++;
@@ -134,7 +144,7 @@ if (sacrifice) {
     }
 }
 
-if (keyboard_check_pressed(vk_escape)) {
+if (exit_pressed) {
     audio_play_sound(snd_cancel, 0, false);
     instance_destroy();
     room_goto(rm_menu);

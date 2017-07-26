@@ -50,12 +50,20 @@ audio_play_sound(snd_menu_music, 1, true);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check_pressed(ord('A'))) {
+            <string>var start_pressed = false;
+var quit_pressed = false;
+
+start_pressed = keyboard_check_pressed(ord('A'));
+quit_pressed = keyboard_check_pressed(vk_escape);
+
+if (start_pressed) {
     audio_stop_sound(snd_menu_music);
     audio_play_sound(snd_confirm, 0, false);
     instance_create(0, 0, obj_control);
     room_goto_next();
 }
+if (quit_pressed)
+    game_end();
 </string>
           </argument>
         </arguments>
