@@ -97,10 +97,10 @@ var right_pressed = false;
 var confirm_pressed = false;
 var exit_pressed = false;
 
-left_pressed = keyboard_check_pressed(vk_left);
-right_pressed = keyboard_check_pressed(vk_right);
-confirm_pressed = keyboard_check_pressed(ord('A'));
-exit_pressed = keyboard_check_pressed(vk_escape);
+left_pressed = keyboard_check_pressed(vk_left) || obj_controls.leftstick_left_pressed;
+right_pressed = keyboard_check_pressed(vk_right) || obj_controls.leftstick_right_pressed;
+confirm_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
+exit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
 
 sac_msg -= 0.01;
 if (sac_msg &lt; 0)

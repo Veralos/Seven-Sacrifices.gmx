@@ -93,6 +93,9 @@ view_surface_id[0] = game_surface;
             <kind>1</kind>
             <string>application_surface_draw_enable(false);
 game_surface = -1;
+
+instance_create(0, 0, obj_controls);
+
 room_goto_next();
 </string>
           </argument>

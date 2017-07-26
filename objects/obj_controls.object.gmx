@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -25,9 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_stop_sound(snd_main_music);
-audio_stop_sound(snd_curse_music);
-audio_play_sound(snd_menu_music, 1, true);
+            <string>leftstick_left_held = false;
+leftstick_right_held = false;
+leftstick_left_pressed = false;
+leftstick_right_pressed = false;
+
+gamepad_set_axis_deadzone(0, 0.5);
 </string>
           </argument>
         </arguments>
@@ -50,58 +53,16 @@ audio_play_sound(snd_menu_music, 1, true);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var start_pressed = false;
-var quit_pressed = false;
+            <string>leftstick_left_pressed = false;
+leftstick_right_pressed = false;
 
-start_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
-quit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
+if (!leftstick_left_held)
+    leftstick_left_pressed = gamepad_axis_value(0, gp_axislh) &lt; 0;
+if (!leftstick_right_held)
+    leftstick_right_pressed = gamepad_axis_value(0, gp_axislh) &gt; 0;
 
-if (start_pressed) {
-    audio_stop_sound(snd_menu_music);
-    audio_play_sound(snd_confirm, 0, false);
-    instance_create(0, 0, obj_control);
-    room_goto_next();
-}
-if (quit_pressed)
-    game_end();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_set_color(c_black);
-draw_set_alpha(0.5);
-
-draw_rectangle(0, 0, room_width, room_height, false);
-
-draw_set_alpha(1);
-
-draw_set_halign(fa_middle);
-draw_set_valign(fa_center);
-
-scr_curse_text(room_width / 2, room_height / 3, "Seven Sacrifices");
-
-draw_set_color(c_white);
-draw_set_font(fnt_item);
-
-draw_text(room_width / 2, room_height * (2 / 3), "Press A to start");
+leftstick_left_held = gamepad_axis_value(0, gp_axislh) &lt; 0;
+leftstick_right_held = gamepad_axis_value(0, gp_axislh) &gt; 0;
 </string>
           </argument>
         </arguments>
