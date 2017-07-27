@@ -164,8 +164,8 @@ else {
         on_ground--;
     if (!place_free(x, y + 1)) {
         on_ground = 1;
-        if (!scr_check_item("Dash Boots"))
-            on_ground += 5;
+        /*if (!scr_check_item("Dash Boots"))
+            on_ground += 5;*/
     }
         
     if (jump_pressed) {
