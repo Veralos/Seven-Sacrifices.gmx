@@ -28,6 +28,8 @@
             <string>event_inherited();
 
 hp = 1;
+
+speed_y = 0;
 </string>
           </argument>
         </arguments>
@@ -54,6 +56,44 @@ hp = 1;
 for (var i = 0; i &lt; 4; i++) {
     var part = instance_create(x + 8, y + 8, obj_part);
     part.sprite_index = spr_crate_part;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+
+var grav = 0;
+if (place_free(x, y + 1))
+    grav = 0.5;
+    
+speed_y += grav;
+if (speed_y &gt; 8)
+    speed_y = 8;
+    
+if (place_free(x, y + speed_y))
+    y += speed_y;
+else {
+    move_contact_solid(270, speed_y);
+    speed_y = 0;
 }
 </string>
           </argument>
