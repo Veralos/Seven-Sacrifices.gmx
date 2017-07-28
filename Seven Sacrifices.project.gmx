@@ -74,6 +74,7 @@
   </shaders>
   <fonts name="fonts">
     <font>fonts\fnt_item</font>
+    <font>fonts\fnt_menu</font>
     <font>fonts\fnt_desc</font>
     <font>fonts\fnt_curse</font>
   </fonts>

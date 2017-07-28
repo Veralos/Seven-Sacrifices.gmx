@@ -28,6 +28,16 @@
             <string>audio_stop_sound(snd_main_music);
 audio_stop_sound(snd_curse_music);
 audio_play_sound(snd_menu_music, 1, true);
+
+options_list = ds_list_create();
+ds_list_add(options_list,
+    "Start",
+    "Continue",
+    "Fullscreen",
+    "Sound",
+    "Music",
+    "Quit"
+);
 </string>
           </argument>
         </arguments>
@@ -96,12 +106,16 @@ draw_set_alpha(1);
 draw_set_halign(fa_middle);
 draw_set_valign(fa_center);
 
-scr_curse_text(room_width / 2, room_height / 3, "Seven Sacrifices");
+scr_curse_text(room_width / 2, 64, "Seven Sacrifices");
 
 draw_set_color(c_white);
-draw_set_font(fnt_item);
+draw_set_font(fnt_menu);
 
-draw_text(room_width / 2, room_height * (2 / 3), "Press A to start");
+//draw_text(room_width / 2, room_height * (2 / 3), "Press A to start");
+
+var gap = 24;
+for (var i = 0; i &lt; ds_list_size(options_list); i++)
+    draw_text(room_width / 2, room_height / 2 + 32 - gap * ds_list_size(options_list) / 2 + gap * i, ds_list_find_value(options_list, i));
 </string>
           </argument>
         </arguments>
