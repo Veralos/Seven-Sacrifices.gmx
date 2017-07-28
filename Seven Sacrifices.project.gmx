@@ -27,6 +27,7 @@
     <sound>sound\snd_dive</sound>
     <sound>sound\snd_menu_music</sound>
     <sound>sound\snd_cancel</sound>
+    <sound>sound\snd_error</sound>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>

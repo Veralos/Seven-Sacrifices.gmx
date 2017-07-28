@@ -38,6 +38,8 @@ ds_list_add(options_list,
     "Music",
     "Quit"
 );
+
+selected = 0;
 </string>
           </argument>
         </arguments>
@@ -62,15 +64,44 @@ ds_list_add(options_list,
             <kind>1</kind>
             <string>var start_pressed = false;
 var quit_pressed = false;
+var up_pressed = false;
+var down_pressed = false;
 
 start_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
 quit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
+up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed;
+down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed;
 
+if (up_pressed) {
+    if (selected &gt; 0) {
+        audio_play_sound(snd_select, 0, false);
+        selected--;
+    }
+}
+if (down_pressed) {
+    if (selected &lt; ds_list_size(options_list) - 1) {
+        audio_play_sound(snd_select, 0, false);
+        selected++;
+    }
+}
 if (start_pressed) {
-    audio_stop_sound(snd_menu_music);
-    audio_play_sound(snd_confirm, 0, false);
-    instance_create(0, 0, obj_control);
-    room_goto_next();
+    switch (selected) {
+        case 0:
+            audio_stop_sound(snd_menu_music);
+            audio_play_sound(snd_confirm, 0, false);
+            instance_create(0, 0, obj_control);
+            room_goto_next();
+            break;
+        case 2:
+            audio_play_sound(snd_confirm, 0, false);
+            window_set_fullscreen(!window_get_fullscreen());
+            break;
+        case 5:
+            game_end();
+        default:
+            audio_play_sound(snd_error, 0, false);
+            break;
+    }
 }
 if (quit_pressed)
     game_end();
@@ -114,8 +145,21 @@ draw_set_font(fnt_menu);
 //draw_text(room_width / 2, room_height * (2 / 3), "Press A to start");
 
 var gap = 24;
-for (var i = 0; i &lt; ds_list_size(options_list); i++)
-    draw_text(room_width / 2, room_height / 2 + 32 - gap * ds_list_size(options_list) / 2 + gap * i, ds_list_find_value(options_list, i));
+for (var i = 0; i &lt; ds_list_size(options_list); i++) {
+    var text = ds_list_find_value(options_list, i);
+    
+    if (i == 2) {
+        text += ": ";
+        if (window_get_fullscreen())
+            text += "On";
+        else
+            text += "Off";
+    }
+    
+    if (i == selected)
+        text = "- " + text + " -";
+    draw_text(room_width / 2, room_height / 2 + 32 - gap * ds_list_size(options_list) / 2 + gap * i, text);
+}
 </string>
           </argument>
         </arguments>

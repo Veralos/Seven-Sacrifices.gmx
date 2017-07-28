@@ -27,8 +27,12 @@
             <kind>1</kind>
             <string>leftstick_left_held = false;
 leftstick_right_held = false;
+leftstick_up_held = false;
+leftstick_down_held = false;
 leftstick_left_pressed = false;
 leftstick_right_pressed = false;
+leftstick_up_pressed = false;
+leftstick_down_pressed = false;
 
 gamepad_set_axis_deadzone(0, 0.5);
 </string>
@@ -55,14 +59,22 @@ gamepad_set_axis_deadzone(0, 0.5);
             <kind>1</kind>
             <string>leftstick_left_pressed = false;
 leftstick_right_pressed = false;
+leftstick_up_pressed = false;
+leftstick_down_pressed = false;
 
 if (!leftstick_left_held)
     leftstick_left_pressed = gamepad_axis_value(0, gp_axislh) &lt; 0;
 if (!leftstick_right_held)
     leftstick_right_pressed = gamepad_axis_value(0, gp_axislh) &gt; 0;
+if (!leftstick_up_held)
+    leftstick_up_pressed = gamepad_axis_value(0, gp_axislv) &lt; 0;
+if (!leftstick_down_held)
+    leftstick_down_pressed = gamepad_axis_value(0, gp_axislv) &gt; 0;
 
 leftstick_left_held = gamepad_axis_value(0, gp_axislh) &lt; 0;
 leftstick_right_held = gamepad_axis_value(0, gp_axislh) &gt; 0;
+leftstick_up_held = gamepad_axis_value(0, gp_axislv) &lt; 0;
+leftstick_down_held = gamepad_axis_value(0, gp_axislv) &gt; 0;
 </string>
           </argument>
         </arguments>
