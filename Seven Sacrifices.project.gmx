@@ -34,36 +34,43 @@
     </sounds>
   </sounds>
   <sprites name="sprites">
-    <sprite>sprites\spr_player</sprite>
-    <sprite>sprites\spr_wall</sprite>
-    <sprite>sprites\spr_light</sprite>
-    <sprite>sprites\spr_person</sprite>
-    <sprite>sprites\spr_skeleton</sprite>
-    <sprite>sprites\spr_skeleton_dead</sprite>
-    <sprite>sprites\spr_person_dash</sprite>
-    <sprite>sprites\spr_person_shoot</sprite>
-    <sprite>sprites\spr_bullet</sprite>
-    <sprite>sprites\spr_person_whip</sprite>
-    <sprite>sprites\spr_whip</sprite>
-    <sprite>sprites\spr_person_hook</sprite>
-    <sprite>sprites\spr_person_dead</sprite>
-    <sprite>sprites\spr_person_jump</sprite>
-    <sprite>sprites\spr_person_fall</sprite>
-    <sprite>sprites\spr_person_run</sprite>
-    <sprite>sprites\spr_hook</sprite>
-    <sprite>sprites\spr_items</sprite>
-    <sprite>sprites\spr_selector</sprite>
-    <sprite>sprites\spr_altar</sprite>
-    <sprite>sprites\spr_altar_burn</sprite>
-    <sprite>sprites\spr_door</sprite>
-    <sprite>sprites\spr_spikes</sprite>
-    <sprite>sprites\sprite19</sprite>
-    <sprite>sprites\spr_spider</sprite>
-    <sprite>sprites\spr_spider_dead</sprite>
-    <sprite>sprites\spr_crate</sprite>
-    <sprite>sprites\spr_crate_part</sprite>
-    <sprite>sprites\spr_bat</sprite>
-    <sprite>sprites\spr_bat_dive</sprite>
+    <sprites name="player">
+      <sprite>sprites\spr_player</sprite>
+      <sprite>sprites\spr_person</sprite>
+      <sprite>sprites\spr_person_dash</sprite>
+      <sprite>sprites\spr_person_shoot</sprite>
+      <sprite>sprites\spr_person_whip</sprite>
+      <sprite>sprites\spr_person_hook</sprite>
+      <sprite>sprites\spr_person_dead</sprite>
+      <sprite>sprites\spr_person_jump</sprite>
+      <sprite>sprites\spr_person_fall</sprite>
+      <sprite>sprites\spr_person_run</sprite>
+      <sprite>sprites\spr_bullet</sprite>
+      <sprite>sprites\spr_whip</sprite>
+      <sprite>sprites\spr_hook</sprite>
+    </sprites>
+    <sprites name="enemies">
+      <sprite>sprites\spr_skeleton</sprite>
+      <sprite>sprites\spr_skeleton_dead</sprite>
+      <sprite>sprites\spr_spider</sprite>
+      <sprite>sprites\spr_spider_dead</sprite>
+      <sprite>sprites\spr_bat</sprite>
+      <sprite>sprites\spr_bat_dive</sprite>
+      <sprite>sprites\spr_crate</sprite>
+      <sprite>sprites\spr_crate_part</sprite>
+    </sprites>
+    <sprites name="level">
+      <sprite>sprites\spr_wall</sprite>
+      <sprite>sprites\spr_light</sprite>
+      <sprite>sprites\spr_altar</sprite>
+      <sprite>sprites\spr_altar_burn</sprite>
+      <sprite>sprites\spr_door</sprite>
+      <sprite>sprites\spr_spikes</sprite>
+    </sprites>
+    <sprites name="interface">
+      <sprite>sprites\spr_items</sprite>
+      <sprite>sprites\spr_selector</sprite>
+    </sprites>
     <sprite>sprites\spr_icon</sprite>
   </sprites>
   <backgrounds name="background">
@@ -84,29 +91,35 @@
     <font>fonts\fnt_curse</font>
   </fonts>
   <objects name="objects">
-    <object>objects\obj_light</object>
-    <object>objects\obj_altar</object>
+    <objects name="player">
+      <object>objects\obj_player</object>
+      <object>objects\obj_hook</object>
+      <object>objects\obj_bullet</object>
+      <object>objects\obj_afterimage</object>
+      <object>objects\obj_end_player</object>
+      <object>objects\obj_whip</object>
+    </objects>
+    <objects name="enemies">
+      <object>objects\obj_enemy</object>
+      <object>objects\obj_skeleton</object>
+      <object>objects\obj_spider</object>
+      <object>objects\obj_bat</object>
+      <object>objects\obj_crate</object>
+      <object>objects\obj_part</object>
+    </objects>
+    <objects name="level">
+      <object>objects\obj_light</object>
+      <object>objects\obj_altar</object>
+      <object>objects\obj_wall</object>
+      <object>objects\obj_door</object>
+      <object>objects\obj_door2</object>
+      <object>objects\obj_spikes</object>
+      <object>objects\obj_tutorial</object>
+    </objects>
     <object>objects\obj_dark</object>
-    <object>objects\obj_player</object>
     <object>objects\obj_draw_game</object>
-    <object>objects\obj_wall</object>
-    <object>objects\obj_hook</object>
-    <object>objects\obj_bullet</object>
-    <object>objects\obj_afterimage</object>
     <object>objects\obj_background</object>
-    <object>objects\obj_door</object>
-    <object>objects\obj_door2</object>
     <object>objects\obj_control</object>
-    <object>objects\obj_end_player</object>
-    <object>objects\obj_spikes</object>
-    <object>objects\obj_part</object>
-    <object>objects\obj_spider</object>
-    <object>objects\obj_enemy</object>
-    <object>objects\obj_whip</object>
-    <object>objects\obj_crate</object>
-    <object>objects\obj_skeleton</object>
-    <object>objects\obj_bat</object>
-    <object>objects\obj_tutorial</object>
     <object>objects\obj_menu</object>
     <object>objects\obj_end</object>
     <object>objects\obj_controls</object>
@@ -114,13 +127,15 @@
   <rooms name="rooms">
     <room>rooms\rm_init</room>
     <room>rooms\rm_menu</room>
-    <room>rooms\rm_tutorial</room>
-    <room>rooms\rm_short</room>
-    <room>rooms\rm_basic</room>
-    <room>rooms\rm_spider</room>
-    <room>rooms\rm_tower</room>
-    <room>rooms\rm_long</room>
-    <room>rooms\rm_final</room>
+    <rooms name="levels">
+      <room>rooms\rm_tutorial</room>
+      <room>rooms\rm_short</room>
+      <room>rooms\rm_basic</room>
+      <room>rooms\rm_spider</room>
+      <room>rooms\rm_tower</room>
+      <room>rooms\rm_long</room>
+      <room>rooms\rm_final</room>
+    </rooms>
     <room>rooms\rm_end</room>
     <room>rooms\rm_test</room>
   </rooms>
