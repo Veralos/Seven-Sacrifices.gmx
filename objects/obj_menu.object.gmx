@@ -29,6 +29,7 @@
 audio_stop_sound(mus_sacrifice);
 audio_play_sound(mus_menu, 1, true);
 
+selected = 0;
 options_list = ds_list_create();
 ds_list_add(options_list,
     "Start",
@@ -38,8 +39,6 @@ ds_list_add(options_list,
     "Music",
     "Quit"
 );
-
-selected = 0;
 </string>
           </argument>
         </arguments>
@@ -96,6 +95,16 @@ if (start_pressed) {
             audio_play_sound(snd_confirm, 0, false);
             window_set_fullscreen(!window_get_fullscreen());
             break;
+        case 3:
+            audio_play_sound(snd_confirm, 0, false);
+            with (obj_audio)
+                event_user(0);
+            break;
+        case 4:
+            audio_play_sound(snd_confirm, 0, false);
+            with (obj_audio)
+                event_user(1);
+            break;
         case 5:
             game_end();
         default:
@@ -148,12 +157,28 @@ var gap = 24;
 for (var i = 0; i &lt; ds_list_size(options_list); i++) {
     var text = ds_list_find_value(options_list, i);
     
-    if (i == 2) {
+    if (i &gt;= 2 &amp;&amp; i &lt;= 4) {
         text += ": ";
-        if (window_get_fullscreen())
-            text += "On";
-        else
-            text += "Off";
+        switch (i) {
+            case 2:
+                if (window_get_fullscreen())
+                    text += "On";
+                else
+                    text += "Off";
+                break;
+            case 3:
+                if (obj_audio.sound_gain &gt; 0)
+                    text += "On";
+                else
+                    text += "Off";
+                break;
+            case 4:
+                if (obj_audio.music_gain &gt; 0)
+                    text += "On";
+                else
+                    text += "Off";
+                break;
+        }
     }
     
     if (i == selected)

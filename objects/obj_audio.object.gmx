@@ -8,7 +8,7 @@
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
-    <event eventtype="3" enumb="0">
+    <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -25,19 +25,44 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (keyboard_check_pressed(vk_f4))
-    window_set_fullscreen(!window_get_fullscreen());
-    
-if (instance_exists(obj_player)) {
-    view_xview[0] = obj_player.x - view_wview[0] / 2;
-    view_yview[0] = obj_player.y - view_hview[0] / 2;
-}
+            <string>sound_gain = 1;
+sound_list = ds_list_create();
+ds_list_add(sound_list,
+    snd_jump,
+    snd_land,
+    snd_hook,
+    snd_hook_hit,
+    snd_whip,
+    snd_shoot,
+    snd_bullet_hit,
+    snd_dash,
+    snd_step,
+    snd_door_open,
+    snd_select,
+    snd_confirm,
+    snd_end,
+    snd_hurt,
+    snd_die,
+    snd_enemy_hit,
+    snd_enemy_die,
+    snd_dive,
+    snd_cancel,
+    snd_error
+);
+
+music_gain = 1;
+music_list = ds_list_create();
+ds_list_add(music_list,
+    mus_main,
+    mus_sacrifice,
+    mus_menu
+);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="4">
+    <event eventtype="7" enumb="11">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -54,27 +79,14 @@ if (instance_exists(obj_player)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>surface_free(game_surface);
-
-view_enabled = true;
-view_xview[0] = 0;
-view_yview[0] = 0;
-view_xport[0] = 0;
-view_yport[0] = 0;
-view_wview[0] = 512;
-view_hview[0] = 288;
-view_wport[0] = 512;
-view_hport[0] = 288;
-view_visible[0] = true;
-
-game_surface = surface_create(view_wview[0], view_hview[0]);
-view_surface_id[0] = game_surface;
+            <string>music_gain = 1 - music_gain;
+scr_set_list_gain(music_list, music_gain);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="2">
+    <event eventtype="7" enumb="10">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -91,41 +103,8 @@ view_surface_id[0] = game_surface;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>application_surface_draw_enable(false);
-game_surface = -1;
-
-instance_create(0, 0, obj_controls);
-instance_create(0, 0, obj_audio);
-
-room_goto_next();
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="77">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (surface_exists(game_surface))
-    draw_surface_stretched(game_surface, 0, 0, window_get_width(), window_get_height());
-else {
-    game_surface = surface_create(view_wview[0], view_hview[0]);
-    view_surface_id[0] = game_surface;
-}
+            <string>sound_gain = 1 - sound_gain;
+scr_set_list_gain(sound_list, sound_gain);
 </string>
           </argument>
         </arguments>
