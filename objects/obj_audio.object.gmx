@@ -68,7 +68,7 @@ scr_set_list_gain(sound_list, sound_gain);
 var music_gain = 0;
 if (music_on)
     music_gain = 1;
-scr_set_list_gain(music_list, sound_gain);
+scr_set_list_gain(music_list, music_gain);
 </string>
           </argument>
         </arguments>
