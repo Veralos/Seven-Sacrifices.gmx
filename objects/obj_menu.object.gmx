@@ -93,7 +93,8 @@ if (start_pressed) {
             break;
         case 2:
             audio_play_sound(snd_confirm, 0, false);
-            window_set_fullscreen(!window_get_fullscreen());
+            with (obj_draw_game)
+                event_user(0);
             break;
         case 3:
             audio_play_sound(snd_confirm, 0, false);
@@ -167,13 +168,13 @@ for (var i = 0; i &lt; ds_list_size(options_list); i++) {
                     text += "Off";
                 break;
             case 3:
-                if (obj_audio.sound_gain &gt; 0)
+                if (obj_audio.sound_on)
                     text += "On";
                 else
                     text += "Off";
                 break;
             case 4:
-                if (obj_audio.music_gain &gt; 0)
+                if (obj_audio.music_on)
                     text += "On";
                 else
                     text += "Off";

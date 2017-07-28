@@ -285,37 +285,6 @@ else {
         </arguments>
       </action>
     </event>
-    <event eventtype="4" ename="obj_enemy">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (inv &lt;= 0 &amp;&amp; dash &lt;= 0 &amp;&amp; other.inv &lt;= 0) {
-    if (shield) {
-        audio_play_sound(snd_hurt, 0, false);
-        shield = false;
-        inv = 120;
-    }
-    else
-        instance_destroy();
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="4" ename="obj_spikes">
       <action>
         <libid>1</libid>
@@ -371,6 +340,37 @@ audio_play_sound(mus_sacrifice, 1, true);
 obj_control.sacrifice = true;
 instance_create(other.x - 16, other.y + 4, obj_end_player);
 instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="obj_enemy">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (inv &lt;= 0 &amp;&amp; dash &lt;= 0 &amp;&amp; other.inv &lt;= 0) {
+    if (shield) {
+        audio_play_sound(snd_hurt, 0, false);
+        shield = false;
+        inv = 120;
+    }
+    else
+        instance_destroy();
+}
 </string>
           </argument>
         </arguments>

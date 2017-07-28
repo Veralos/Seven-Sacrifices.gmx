@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sound_gain = 1;
-sound_list = ds_list_create();
+            <string>sound_list = ds_list_create();
 ds_list_add(sound_list,
     snd_jump,
     snd_land,
@@ -50,13 +49,26 @@ ds_list_add(sound_list,
     snd_error
 );
 
-music_gain = 1;
 music_list = ds_list_create();
 ds_list_add(music_list,
     mus_main,
     mus_sacrifice,
     mus_menu
 );
+
+ini_open("ss_data")
+sound_on = ini_read_real("Settings", "Sound", true);
+music_on = ini_read_real("Settings", "Music", true);
+ini_close();
+
+var sound_gain = 0;
+if (sound_on)
+    sound_gain = 1;
+scr_set_list_gain(sound_list, sound_gain);
+var music_gain = 0;
+if (music_on)
+    music_gain = 1;
+scr_set_list_gain(music_list, sound_gain);
 </string>
           </argument>
         </arguments>
@@ -79,8 +91,15 @@ ds_list_add(music_list,
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>music_gain = 1 - music_gain;
-scr_set_list_gain(music_list, music_gain);
+            <string>music_on = !music_on;
+var gain = 0;
+if (music_on)
+    gain = 1;
+scr_set_list_gain(music_list, gain);
+
+ini_open("ss_data");
+ini_write_real("Settings", "Music", music_on);
+ini_close();
 </string>
           </argument>
         </arguments>
@@ -103,8 +122,15 @@ scr_set_list_gain(music_list, music_gain);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sound_gain = 1 - sound_gain;
-scr_set_list_gain(sound_list, sound_gain);
+            <string>sound_on = !sound_on;
+var gain = 0;
+if (sound_on)
+    gain = 1;
+scr_set_list_gain(sound_list, gain);
+
+ini_open("ss_data");
+ini_write_real("Settings", "Sound", sound_on);
+ini_close();
 </string>
           </argument>
         </arguments>
