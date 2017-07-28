@@ -5,29 +5,33 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound">
-    <sound>sound\snd_jump</sound>
-    <sound>sound\snd_land</sound>
-    <sound>sound\snd_hook</sound>
-    <sound>sound\snd_hook_hit</sound>
-    <sound>sound\snd_whip</sound>
-    <sound>sound\snd_shoot</sound>
-    <sound>sound\snd_bullet_hit</sound>
-    <sound>sound\snd_dash</sound>
-    <sound>sound\snd_step</sound>
-    <sound>sound\snd_door_open</sound>
-    <sound>sound\snd_select</sound>
-    <sound>sound\snd_confirm</sound>
-    <sound>sound\snd_main_music</sound>
-    <sound>sound\snd_curse_music</sound>
-    <sound>sound\snd_end</sound>
-    <sound>sound\snd_hurt</sound>
-    <sound>sound\snd_die</sound>
-    <sound>sound\snd_enemy_hit</sound>
-    <sound>sound\snd_enemy_die</sound>
-    <sound>sound\snd_dive</sound>
-    <sound>sound\snd_menu_music</sound>
-    <sound>sound\snd_cancel</sound>
-    <sound>sound\snd_error</sound>
+    <sounds name="sounds">
+      <sound>sound\snd_jump</sound>
+      <sound>sound\snd_land</sound>
+      <sound>sound\snd_hook</sound>
+      <sound>sound\snd_hook_hit</sound>
+      <sound>sound\snd_whip</sound>
+      <sound>sound\snd_shoot</sound>
+      <sound>sound\snd_bullet_hit</sound>
+      <sound>sound\snd_dash</sound>
+      <sound>sound\snd_step</sound>
+      <sound>sound\snd_door_open</sound>
+      <sound>sound\snd_select</sound>
+      <sound>sound\snd_confirm</sound>
+      <sound>sound\snd_end</sound>
+      <sound>sound\snd_hurt</sound>
+      <sound>sound\snd_die</sound>
+      <sound>sound\snd_enemy_hit</sound>
+      <sound>sound\snd_enemy_die</sound>
+      <sound>sound\snd_dive</sound>
+      <sound>sound\snd_cancel</sound>
+      <sound>sound\snd_error</sound>
+    </sounds>
+    <sounds name="music">
+      <sound>sound\mus_main</sound>
+      <sound>sound\mus_sacrifice</sound>
+      <sound>sound\mus_menu</sound>
+    </sounds>
   </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>

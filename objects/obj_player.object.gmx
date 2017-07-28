@@ -364,9 +364,9 @@ else {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_stop_sound(snd_main_music);
+            <string>audio_stop_sound(mus_main);
 audio_play_sound(snd_end, 0, false);
-audio_play_sound(snd_curse_music, 1, true);
+audio_play_sound(mus_sacrifice, 1, true);
 
 obj_control.sacrifice = true;
 instance_create(other.x - 16, other.y + 4, obj_end_player);

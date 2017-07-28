@@ -116,7 +116,7 @@ if (sacrifice) {
         selected++;
     }
     if (confirm_pressed) {
-        audio_stop_sound(snd_curse_music);
+        audio_stop_sound(mus_sacrifice);
         audio_play_sound(snd_confirm, 0, false);
         sacrifices++;
         sac_msg = 2;
@@ -171,8 +171,8 @@ if (exit_pressed) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!audio_is_playing(snd_main_music))
-    audio_play_sound(snd_main_music, 1, true);
+            <string>if (!audio_is_playing(mus_main))
+    audio_play_sound(mus_main, 1, true);
     
 room_speed = 60;
 instance_create(0, 0, obj_dark);
