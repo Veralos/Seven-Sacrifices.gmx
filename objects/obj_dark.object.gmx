@@ -64,7 +64,7 @@
         var rad = 60;
         if (scr_check_item("Lantern"))
             rad = 120;
-        var shoot_rad = shoot / 4 * 200;
+        var shoot_rad = shoot / 4 * rad * 2;//200;
         draw_circle(x - view_xview[0], y - view_yview[0], max(rad, shoot_rad) + random(2), false);
     }
     with (obj_end_player) {

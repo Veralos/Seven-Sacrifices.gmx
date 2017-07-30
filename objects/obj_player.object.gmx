@@ -74,8 +74,10 @@ on_ground = 0;
             <kind>1</kind>
             <string>if (!obj_control.sacrifice) {
     audio_play_sound(snd_die, 0, false);
-    with (instance_create(x, y, obj_part))
+    with (instance_create(x, y, obj_part)) {
         sprite_index = spr_person_dead;
+        destroy = false;
+    }
     obj_control.alarm[0] = 60;
 }
 </string>

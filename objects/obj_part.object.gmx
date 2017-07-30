@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>gravity = 0.5;
+            <string>destroy = true;
+gravity = 0.5;
 direction = 45 + random(90);
 speed = 5 + random(3);
 image_angle = random(360);
@@ -76,7 +77,8 @@ image_index = random(image_number);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_destroy();
+            <string>if (destroy)
+    instance_destroy();
 </string>
           </argument>
         </arguments>
