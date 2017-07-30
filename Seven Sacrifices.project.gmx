@@ -84,6 +84,8 @@
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shad_white.shader</shader>
+    <shader type="GLSLES">shaders\shad_monochrome.shader</shader>
+    <shader type="GLSLES">shaders\shad_threshold.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\fnt_item</font>
