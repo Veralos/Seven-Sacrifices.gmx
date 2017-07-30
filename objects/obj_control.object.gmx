@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>item_list = ds_list_create();
+            <string>paused = false;
+
+item_list = ds_list_create();
 for (var i = 0; i &lt; 6; i++)
     ds_list_add(item_list, i);
     
@@ -145,9 +147,17 @@ if (sacrifice) {
 }
 
 if (exit_pressed) {
-    audio_play_sound(snd_cancel, 0, false);
-    instance_destroy();
-    room_goto(rm_menu);
+    if (instance_exists(obj_player)) {
+        audio_play_sound(snd_cancel, 0, false);
+        paused = !paused;
+    }
+    //instance_destroy();
+    //room_goto(rm_menu);
+}
+
+if (!instance_exists(obj_player)) {
+    audio_stop_sound(snd_cancel);
+    paused = false;
 }
 </string>
           </argument>

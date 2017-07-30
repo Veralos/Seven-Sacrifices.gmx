@@ -48,8 +48,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x += 8 * facing;
-image_xscale = facing;
+            <string>if (!obj_control.paused) {
+    x += 8 * facing;
+    image_xscale = facing;
+}
 </string>
           </argument>
         </arguments>

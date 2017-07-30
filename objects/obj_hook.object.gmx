@@ -49,21 +49,22 @@ dir = -1;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (move) {
-    if (place_free(x, y + 8 * dir))
-        y += 8 * dir;
-    else {
-        audio_play_sound(snd_hook_hit, 0, false);
-        move = false;
-        move_contact_solid(90, 16);
+            <string>if (!obj_control.paused) {
+    if (move) {
+        if (place_free(x, y + 8 * dir))
+            y += 8 * dir;
+        else {
+            audio_play_sound(snd_hook_hit, 0, false);
+            move = false;
+            move_contact_solid(90, 16);
+        }
+    }
+    
+    if (instance_exists(obj_player)) {
+        if (y &gt; obj_player.y)
+            instance_destroy();
     }
 }
-
-if (instance_exists(obj_player)) {
-    if (y &gt; obj_player.y)
-        instance_destroy();
-}
-
 </string>
           </argument>
         </arguments>
@@ -86,8 +87,10 @@ if (instance_exists(obj_player)) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_play_sound(snd_land, 0, false);
-dir = 1;
+            <string>if (dir != 1) {
+    audio_play_sound(snd_land, 0, false);
+    dir = 1;
+}
 </string>
           </argument>
         </arguments>

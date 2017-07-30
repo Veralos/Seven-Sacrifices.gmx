@@ -48,9 +48,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>frame += 0.25;
-if (frame &gt;= 4)
-    frame = 0;
+            <string>if (!scr_paused()) {
+    frame += 0.25;
+    if (frame &gt;= 4)
+        frame = 0;
+}
 </string>
           </argument>
         </arguments>

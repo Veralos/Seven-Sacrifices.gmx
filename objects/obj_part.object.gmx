@@ -26,9 +26,14 @@
           <argument>
             <kind>1</kind>
             <string>destroy = true;
-gravity = 0.5;
-direction = 45 + random(90);
-speed = 5 + random(3);
+
+grav = 0.5;
+dir = 45 + random(90);
+spd = 5 + random(3);
+
+speed_x = lengthdir_x(spd, dir);
+speed_y = lengthdir_y(spd, dir);
+
 image_angle = random(360);
 image_speed = 0;
 image_index = random(image_number);
@@ -54,7 +59,17 @@ image_index = random(image_number);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle -= hspeed / 2;
+            <string>if (!obj_control.paused) {
+    speed_y += grav;
+    if (speed_y &gt; 8)
+        speed_y = 8;
+        
+    x += speed_x;
+    y += speed_y;    
+
+    image_angle -= speed_y / 2;
+}
+
 </string>
           </argument>
         </arguments>

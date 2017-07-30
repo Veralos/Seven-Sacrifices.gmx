@@ -49,8 +49,6 @@
           <argument>
             <kind>1</kind>
             <string>if (surface_exists(dark_surface)) {
-    //draw_set_color(make_color_rgb(56, 50, 16));
-
     surface_set_target(dark_surface);
     
     draw_clear(c_black);
@@ -58,27 +56,32 @@
     draw_set_color(c_black);
     
     draw_set_blend_mode(bm_subtract);
+    
+    var rand = 2;
+    if (scr_paused())
+        rand = 0;
+    
     with (obj_light)
-        draw_circle(x - view_xview[0], y - view_yview[0], 50 + random(2), false);
+        draw_circle(x - view_xview[0], y - view_yview[0], 50 + random(rand), false);
     with (obj_player) {
         var rad = 60;
         if (scr_check_item("Lantern"))
             rad = 120;
         var shoot_rad = shoot / 4 * rad * 2;//200;
-        draw_circle(x - view_xview[0], y - view_yview[0], max(rad, shoot_rad) + random(2), false);
+        draw_circle(x - view_xview[0], y - view_yview[0], max(rad, shoot_rad) + random(rand), false);
     }
     with (obj_end_player) {
         var rad = 60;
         if (scr_check_item("Lantern"))
             rad = 120;
-        draw_circle(x - view_xview[0], y - view_yview[0], rad + random(2), false);
+        draw_circle(x - view_xview[0], y - view_yview[0], rad + random(rand), false);
     }
     with (obj_part) {
         if (sprite_index = spr_person_dead) {
             var rad = 60;
             if (scr_check_item("Lantern"))
                 rad = 120;
-            draw_circle(x - view_xview[0], y - view_yview[0], rad + random(2), false);
+            draw_circle(x - view_xview[0], y - view_yview[0], rad + random(rand), false);
         }
     }
     draw_set_blend_mode(bm_normal);

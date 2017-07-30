@@ -79,21 +79,23 @@ for (var i = 0; i &lt; 4; i++) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
-
-var grav = 0;
-if (place_free(x, y + 1))
-    grav = 0.5;
+            <string>if (!obj_control.paused) {
+    event_inherited();
     
-speed_y += grav;
-if (speed_y &gt; 8)
-    speed_y = 8;
-    
-if (place_free(x, y + speed_y))
-    y += speed_y;
-else {
-    move_contact_solid(270, speed_y);
-    speed_y = 0;
+    var grav = 0;
+    if (place_free(x, y + 1))
+        grav = 0.5;
+        
+    speed_y += grav;
+    if (speed_y &gt; 8)
+        speed_y = 8;
+        
+    if (place_free(x, y + speed_y))
+        y += speed_y;
+    else {
+        move_contact_solid(270, speed_y);
+        speed_y = 0;
+    }
 }
 </string>
           </argument>

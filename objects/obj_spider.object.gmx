@@ -54,24 +54,26 @@ frame = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
-
-if (!inv) {
-    frame += 0.5;
-    if (frame &gt;= 12)
-        frame = 0;
+            <string>if (!obj_control.paused) {
+    event_inherited();
     
-    var ld_x = lengthdir_x(2, dir);
-    var ld_y = lengthdir_y(2, dir);
-    
-    if (place_free(x + ld_x, y + ld_y)) {
-        x += ld_x;
-        y += ld_y;
-    }
-    else {
-        dir -= 90;
-        if (dir &lt; 0)
-            dir += 360;
+    if (!inv) {
+        frame += 0.5;
+        if (frame &gt;= 12)
+            frame = 0;
+        
+        var ld_x = lengthdir_x(2, dir);
+        var ld_y = lengthdir_y(2, dir);
+        
+        if (place_free(x + ld_x, y + ld_y)) {
+            x += ld_x;
+            y += ld_y;
+        }
+        else {
+            dir -= 90;
+            if (dir &lt; 0)
+                dir += 360;
+        }
     }
 }
 </string>
