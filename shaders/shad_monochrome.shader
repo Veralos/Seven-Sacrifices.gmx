@@ -27,7 +27,9 @@ varying vec4 v_vColour;
 void main()
 {
     vec4 col = v_vColour * texture2D( gm_BaseTexture, v_vTexcoord );
-    float v = max(max(col.r, col.g), col.b);
+    float v = max(max(col.r, col.g), col.b) - 0.2;
+    if (v < 0.0)
+        v = 0.0;
     col.r = v;
     col.g = v;
     col.b = v;

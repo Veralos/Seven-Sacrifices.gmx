@@ -67,7 +67,7 @@ image_index = random(image_number);
     x += speed_x;
     y += speed_y;    
 
-    image_angle -= speed_y / 2;
+    image_angle -= speed_x / 2;
 }
 
 </string>

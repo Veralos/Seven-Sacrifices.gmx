@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>paused = false;
+            <string>pause_list = ds_list_create();
+ds_list_add(pause_list, "Continue", "Quit");
+
+paused = false;
+pause_selected = 0;
 
 item_list = ds_list_create();
 for (var i = 0; i &lt; 6; i++)
@@ -96,11 +100,15 @@ sac_name = "";
             <kind>1</kind>
             <string>var left_pressed = false;
 var right_pressed = false;
+var up_pressed = false;
+var down_pressed = false;
 var confirm_pressed = false;
 var exit_pressed = false;
 
 left_pressed = keyboard_check_pressed(vk_left) || obj_controls.leftstick_left_pressed;
 right_pressed = keyboard_check_pressed(vk_right) || obj_controls.leftstick_right_pressed;
+up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed;
+down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed;
 confirm_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
 exit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
 
@@ -151,13 +159,33 @@ if (exit_pressed) {
         audio_play_sound(snd_cancel, 0, false);
         paused = !paused;
     }
-    //instance_destroy();
-    //room_goto(rm_menu);
 }
 
 if (!instance_exists(obj_player)) {
     audio_stop_sound(snd_cancel);
     paused = false;
+}
+
+if (paused) {
+    if (up_pressed &amp;&amp; pause_selected &gt; 0) {
+        audio_play_sound(snd_select, 0, false);
+        pause_selected--;
+    }
+    if (down_pressed &amp;&amp; pause_selected &lt; ds_list_size(pause_list) - 1) {
+        audio_play_sound(snd_select, 0, false);
+        pause_selected++;
+    }
+    if (confirm_pressed) {
+        audio_play_sound(snd_confirm, 0, false);
+        switch (pause_selected) {
+            case 0:
+                paused = false;
+                break;
+            case 1:
+                instance_destroy();
+                room_goto(rm_menu);
+        }
+    }
 }
 </string>
           </argument>
@@ -254,6 +282,30 @@ instance_create(0, 0, obj_background);
     draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2 + 110, "Left/Right to select - A to confirm");
     
     scr_curse_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 4, "What will you sacrifice?");
+}
+
+if (paused) {
+    draw_set_color(c_black);
+    draw_set_alpha(0.5);
+    draw_rectangle(view_xview[0], view_yview[0], view_xview[0] + view_wview[0], view_yview[0] + view_hview[0], false);
+    draw_set_alpha(1);
+    
+    draw_set_color(c_white);
+    draw_set_font(fnt_item);
+    draw_set_halign(fa_middle);
+    draw_set_valign(fa_center);
+    
+    draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 3, "PAUSED");
+    
+    draw_set_font(fnt_menu);
+    
+    var gap = 24;
+    for (var i = 0; i &lt; ds_list_size(pause_list); i++) {
+        var text = ds_list_find_value(pause_list, i);
+        if (i == pause_selected)
+            text = "- " + text + " -";
+        draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] * (2 / 3) - gap * ds_list_size(pause_list) / 2 + gap * i, text);
+    }
 }
 
 draw_set_color(c_white);

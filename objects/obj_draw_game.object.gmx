@@ -152,13 +152,7 @@ room_goto_next();
           <argument>
             <kind>1</kind>
             <string>if (surface_exists(game_surface)) {
-    if (scr_paused())
-        shader_set(shad_monochrome);
-        
     draw_surface_stretched(game_surface, 0, 0, window_get_width(), window_get_height());
-    
-    if (!scr_paused())
-        shader_reset();
 }
 else {
     game_surface = surface_create(view_wview[0], view_hview[0]);

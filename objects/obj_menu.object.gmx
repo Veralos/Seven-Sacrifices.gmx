@@ -152,8 +152,6 @@ scr_curse_text(room_width / 2, 64, "Seven Sacrifices");
 draw_set_color(c_white);
 draw_set_font(fnt_menu);
 
-//draw_text(room_width / 2, room_height * (2 / 3), "Press A to start");
-
 var gap = 24;
 for (var i = 0; i &lt; ds_list_size(options_list); i++) {
     var text = ds_list_find_value(options_list, i);
