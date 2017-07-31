@@ -158,6 +158,10 @@ if (exit_pressed) {
     if (instance_exists(obj_player)) {
         audio_play_sound(snd_cancel, 0, false);
         paused = !paused;
+        if (paused)
+            audio_pause_sound(mus_main);
+        else
+            audio_resume_sound(mus_main);
     }
 }
 
@@ -180,6 +184,7 @@ if (paused) {
         switch (pause_selected) {
             case 0:
                 paused = false;
+                audio_resume_sound(mus_main);
                 break;
             case 1:
                 instance_destroy();

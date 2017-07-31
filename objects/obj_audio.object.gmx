@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sound_list = ds_list_create();
+            <string>step_mod = 0.6;
+
+sound_list = ds_list_create();
 ds_list_add(sound_list,
     snd_jump,
     snd_land,
@@ -65,7 +67,7 @@ var sound_gain = 0;
 if (sound_on)
     sound_gain = 1;
 scr_set_list_gain(sound_list, sound_gain);
-audio_sound_gain(snd_step, sound_gain * 0.5, 0);
+audio_sound_gain(snd_step, sound_gain * step_mod, 0);
 
 var music_gain = 0;
 if (music_on)
@@ -129,7 +131,7 @@ var gain = 0;
 if (sound_on)
     gain = 1;
 scr_set_list_gain(sound_list, gain);
-audio_sound_gain(snd_step, gain * 0.5, 0);
+audio_sound_gain(snd_step, gain * step_mod, 0);
 
 ini_open("ss_data");
 ini_write_real("Settings", "Sound", sound_on);
