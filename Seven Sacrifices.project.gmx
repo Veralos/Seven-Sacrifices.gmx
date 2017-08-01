@@ -46,6 +46,7 @@
       <sprite>sprites\spr_person_fall</sprite>
       <sprite>sprites\spr_person_run</sprite>
       <sprite>sprites\spr_bullet</sprite>
+      <sprite>sprites\spr_spark</sprite>
       <sprite>sprites\spr_whip</sprite>
       <sprite>sprites\spr_hook</sprite>
     </sprites>
@@ -132,6 +133,7 @@
     <object>objects\obj_end</object>
     <object>objects\obj_controls</object>
     <object>objects\obj_audio</object>
+    <object>objects\obj_spark</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>
