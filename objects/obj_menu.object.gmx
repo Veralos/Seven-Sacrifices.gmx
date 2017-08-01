@@ -42,7 +42,11 @@ ini_close();
 item_list = ds_list_create();
 ds_list_read(item_list, item_list_string);
 
-selected = 0;
+if (ds_list_size(item_list) &lt; ds_list_size(base_item_list))
+    selected = 1;
+else
+    selected = 0;
+
 options_list = ds_list_create();
 ds_list_add(options_list,
     "Start",
@@ -117,11 +121,15 @@ if (start_pressed) {
             room_goto_next();
             break;
         case 1:
-            audio_stop_sound(mus_menu);
-            audio_play_sound(snd_confirm, 0, false);
-            control = instance_create(0, 0, obj_control);
-            control.item_list = item_list;
-            room_goto(ds_list_find_value(room_list, ds_list_size(room_list) - (ds_list_size(item_list) + 1)));
+            if (ds_list_size(item_list) &lt; ds_list_size(base_item_list)) {
+                audio_stop_sound(mus_menu);
+                audio_play_sound(snd_confirm, 0, false);
+                control = instance_create(0, 0, obj_control);
+                control.item_list = item_list;
+                room_goto(ds_list_find_value(room_list, ds_list_size(room_list) - (ds_list_size(item_list) + 1)));
+            }
+            else
+                audio_play_sound(snd_error, 0, false);
             break;
         case 2:
             audio_play_sound(snd_confirm, 0, false);
@@ -188,6 +196,9 @@ var gap = 24;
 for (var i = 0; i &lt; ds_list_size(options_list); i++) {
     var text = ds_list_find_value(options_list, i);
     
+    if (i == 1 &amp;&amp; !(ds_list_size(item_list) &lt; ds_list_size(base_item_list)))
+        draw_set_alpha(0.5);
+    
     if (i &gt;= 2 &amp;&amp; i &lt;= 4) {
         text += ": ";
         switch (i) {
@@ -215,6 +226,8 @@ for (var i = 0; i &lt; ds_list_size(options_list); i++) {
     if (i == selected)
         text = "- " + text + " -";
     draw_text(room_width / 2, room_height / 2 + 32 - gap * ds_list_size(options_list) / 2 + gap * i, text);
+
+    draw_set_alpha(1);
 }
 </string>
           </argument>
