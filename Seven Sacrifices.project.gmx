@@ -83,6 +83,7 @@
     <script>scripts\scr_set_list_gain.gml</script>
     <script>scripts\scr_paused.gml</script>
     <script>scripts\scr_check_gamepad.gml</script>
+    <script>scripts\scr_parse_controls_text.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shad_white.shader</shader>

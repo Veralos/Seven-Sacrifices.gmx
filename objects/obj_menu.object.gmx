@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-100000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -229,6 +229,13 @@ for (var i = 0; i &lt; ds_list_size(options_list); i++) {
 
     draw_set_alpha(1);
 }
+
+draw_set_font(fnt_desc);
+
+var select_text = scr_parse_controls_text("Select: &lt;ud&gt;");
+var confirm_text = scr_parse_controls_text("Confirm: &lt;a&gt;");
+draw_text(room_width / 4, room_height - 16, select_text);
+draw_text(room_width * (3 / 4), room_height - 16, confirm_text);
 </string>
           </argument>
         </arguments>

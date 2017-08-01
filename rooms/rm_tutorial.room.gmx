@@ -600,7 +600,7 @@
     <instance objName="obj_light" x="1072" y="192" name="inst_26C1CE53" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_light" x="1152" y="192" name="inst_9ED08219" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_light" x="1280" y="176" name="inst_9BC5FBBA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_tutorial" x="64" y="208" name="inst_7C29A0C6" locked="0" code="text = &quot;Use Left/Right#to move&quot;;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_tutorial" x="64" y="208" name="inst_7C29A0C6" locked="0" code="text = &quot;Use Left/Right#to move&quot;;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_tutorial" x="240" y="208" name="inst_50F98CCC" locked="0" code="text = &quot;Press Up to jump#Hold to jump higher&quot;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_tutorial" x="608" y="144" name="inst_2C8FD801" locked="0" code="text = &quot;Press S to shoot&quot;;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_tutorial" x="848" y="144" name="inst_BB608F63" locked="0" code="text = &quot;Press D to use#the grappling hook&quot;;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
