@@ -7,6 +7,7 @@ ds_map_add(item_map, "Gun", 2);
 ds_map_add(item_map, "Grappling Hook", 3);
 ds_map_add(item_map, "Dash Boots", 4);
 ds_map_add(item_map, "Amulet", 5);
+ds_map_add(item_map, "Your Life", 6);
 
 var result = false;
 if (instance_exists(obj_control))

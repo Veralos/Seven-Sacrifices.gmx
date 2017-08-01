@@ -116,9 +116,11 @@ down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pr
 confirm_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
 exit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
 
-sac_msg -= 0.01;
-if (sac_msg &lt; 0)
-sac_msg = 0;
+if (!scr_paused()) {
+    sac_msg -= 0.01;
+    if (sac_msg &lt; 0)
+    sac_msg = 0;
+}
 
 if (sacrifice) {
     if (left_pressed &amp;&amp; selected &gt; 0) {
@@ -133,7 +135,7 @@ if (sacrifice) {
         audio_stop_sound(mus_sacrifice);
         audio_play_sound(snd_confirm, 0, false);
         sac_msg = 2;
-        sac_name = ds_list_find_value(item_title_list, selected);
+        sac_name = ds_list_find_value(item_title_list, ds_list_find_value(item_list, selected));
         if (ds_list_find_value(item_list, selected) == 6) {
             instance_destroy();
             room_goto_next();
@@ -267,7 +269,24 @@ instance_create(0, 0, obj_background);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (sacrifice) {
+            <string>draw_set_color(c_white);
+draw_set_font(fnt_item);
+draw_set_halign(fa_middle);
+draw_set_valign(fa_center);
+
+draw_set_alpha(sac_msg);
+
+draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2, sac_name + " Sacrificed##" + string(sacrifices) + "/7 Sacrifices Made");
+
+draw_set_alpha(1);
+
+if (!scr_check_item("Your Life")) {
+    var place = view_xview[0] + view_wview[0] / 2 - (ds_list_size(item_list) * 40) / 2
+    for (var i = 0; i &lt; ds_list_size(item_list); i++)
+        draw_sprite(spr_items, ds_list_find_value(item_list, i), place + 20 + 40 * i , view_yview[0] + 24);
+}
+
+if (sacrifice) {
     draw_set_color(c_black);
     draw_set_alpha(0.5);
     draw_rectangle(view_xview[0], view_yview[0], view_xview[0] + view_wview[0], view_yview[0] + view_hview[0], false);
@@ -328,19 +347,6 @@ if (paused) {
     draw_text(view_xview[0] + view_wview[0] / 4, view_yview[0] + view_hview[0] - 16, select_text);
     draw_text(view_xview[0] + view_wview[0] * (3 / 4), view_yview[0] + view_hview[0] - 16, confirm_text);
 }
-
-draw_set_color(c_white);
-draw_set_font(fnt_item);
-draw_set_halign(fa_middle);
-draw_set_valign(fa_center);
-
-draw_set_alpha(sac_msg);
-
-draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2, sac_name + " Sacrificed##" + string(sacrifices) + "/7 Sacrifices Made");
-
-draw_set_alpha(1);
-
-
 </string>
           </argument>
         </arguments>
