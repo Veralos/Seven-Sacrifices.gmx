@@ -36,6 +36,22 @@ leftstick_down_pressed = false;
 
 gamepad_set_axis_deadzone(0, 0.5);
 
+command_list = ds_list_create();
+ds_list_add(command_list,
+    "&lt;lr&gt;",
+    "&lt;ud&gt;",
+    "&lt;a&gt;",
+    "&lt;lrkey&gt;",
+    "&lt;ukey&gt;",
+    "&lt;akey&gt;",
+    "&lt;skey&gt;",
+    "&lt;dkey&gt;"
+);
+
+command_map = ds_map_create();
+for (var i = 0; i &lt; ds_list_size(command_list); i++)
+    ds_map_add(command_map, ds_list_find_value(command_list, i), "");
+
 gamepad = gamepad_is_connected(0);
 event_user(0);
 </string>
@@ -103,23 +119,25 @@ event_user(0);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>lr = "Left/Right";
-ud = "Up/Down";
-a = "A";
-lrkey = "Left and Right keys";
-ukey = "Up key";
-akey = "A key";
-skey = "S key";
-dkey = "D key";
-if (gamepad) {
-    lr = "Left stick";
-    ud = "Left stick";
-    a = "A button";
-    lrkey = "Left stick";
-    ukey = "A button";
-    akey = "X button";
-    skey = "B button";
-    dkey = "Y button";
+            <string>if (gamepad) {
+    ds_map_replace(command_map, "&lt;lr&gt;", "Left stick");
+    ds_map_replace(command_map, "&lt;ud&gt;", "Left stick");
+    ds_map_replace(command_map, "&lt;a&gt;", "A button");
+    ds_map_replace(command_map, "&lt;lrkey&gt;", "left stick");
+    ds_map_replace(command_map, "&lt;ukey&gt;", "A button");
+    ds_map_replace(command_map, "&lt;akey&gt;", "X button");
+    ds_map_replace(command_map, "&lt;skey&gt;", "B button");
+    ds_map_replace(command_map, "&lt;dkey&gt;", "Y button");
+}
+else {
+    ds_map_replace(command_map, "&lt;lr&gt;", "Left/Right");
+    ds_map_replace(command_map, "&lt;ud&gt;", "Up/Down");
+    ds_map_replace(command_map, "&lt;a&gt;", "A");
+    ds_map_replace(command_map, "&lt;lrkey&gt;", "Left and Right keys");
+    ds_map_replace(command_map, "&lt;ukey&gt;", "Up key");
+    ds_map_replace(command_map, "&lt;akey&gt;", "A key");
+    ds_map_replace(command_map, "&lt;skey&gt;", "S key");
+    ds_map_replace(command_map, "&lt;dkey&gt;", "D key");
 }
 </string>
           </argument>
