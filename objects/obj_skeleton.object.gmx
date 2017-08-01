@@ -63,7 +63,7 @@ move_contact_solid(270, 16);
         if (frame &gt;= 12)
             frame = 0;
             
-        if (place_free(x + dir * 1, y) &amp;&amp; ! place_free(x + dir * 16, y + 1))
+        if (place_free(x + dir * 1, y) &amp;&amp; ! place_free(x + dir * 8, y + 1))
             x += dir * 1;
         else
             dir = -dir;
