@@ -320,6 +320,13 @@ if (paused) {
             text = "- " + text + " -";
         draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] * (2 / 3) - gap * ds_list_size(pause_list) / 2 + gap * i, text);
     }
+    
+    draw_set_font(fnt_desc);
+    
+    var select_text = scr_parse_controls_text("Select: &lt;ud&gt;");
+    var confirm_text = scr_parse_controls_text("Confirm: &lt;a&gt;");
+    draw_text(view_xview[0] + view_wview[0] / 4, view_yview[0] + view_hview[0] - 16, select_text);
+    draw_text(view_xview[0] + view_wview[0] * (3 / 4), view_yview[0] + view_hview[0] - 16, confirm_text);
 }
 
 draw_set_color(c_white);
