@@ -79,7 +79,7 @@ sac_name = "";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>room_restart();
+            <string>scr_room_goto(room);
 </string>
           </argument>
         </arguments>
@@ -109,12 +109,14 @@ var down_pressed = false;
 var confirm_pressed = false;
 var exit_pressed = false;
 
-left_pressed = keyboard_check_pressed(vk_left) || obj_controls.leftstick_left_pressed;
-right_pressed = keyboard_check_pressed(vk_right) || obj_controls.leftstick_right_pressed;
-up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed;
-down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed;
-confirm_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
-exit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
+if (!scr_fading()) {
+    left_pressed = keyboard_check_pressed(vk_left) || obj_controls.leftstick_left_pressed;
+    right_pressed = keyboard_check_pressed(vk_right) || obj_controls.leftstick_right_pressed;
+    up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed;
+    down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed;
+    confirm_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
+    exit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
+}
 
 if (!scr_paused()) {
     sac_msg -= 0.01;
@@ -161,6 +163,7 @@ if (sacrifice) {
 if (exit_pressed) {
     if (instance_exists(obj_player)) {
         audio_play_sound(snd_cancel, 0, false);
+        sac_msg = 0;
         paused = !paused;
         if (paused)
             audio_pause_sound(mus_main);
@@ -191,8 +194,8 @@ if (paused) {
                 audio_resume_sound(mus_main);
                 break;
             case 1:
-                instance_destroy();
-                room_goto(rm_menu);
+                persistent = false;
+                scr_room_goto(rm_menu);
         }
     }
 }
@@ -274,13 +277,7 @@ draw_set_font(fnt_item);
 draw_set_halign(fa_middle);
 draw_set_valign(fa_center);
 
-draw_set_alpha(sac_msg);
-
-draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2, sac_name + " Sacrificed##" + string(sacrifices) + "/7 Sacrifices Made");
-
-draw_set_alpha(1);
-
-if (!scr_check_item("Your Life")) {
+if (!scr_check_item("Your Life") &amp;&amp; !instance_exists(obj_menu)) {
     var place = view_xview[0] + view_wview[0] / 2 - (ds_list_size(item_list) * 40) / 2
     for (var i = 0; i &lt; ds_list_size(item_list); i++)
         draw_sprite(spr_items, ds_list_find_value(item_list, i), place + 20 + 40 * i , view_yview[0] + 24);

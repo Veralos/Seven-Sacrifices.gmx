@@ -26,6 +26,7 @@
       <sound>sound\snd_dive</sound>
       <sound>sound\snd_cancel</sound>
       <sound>sound\snd_error</sound>
+      <sound>sound\snd_enter</sound>
     </sounds>
     <sounds name="music">
       <sound>sound\mus_main</sound>
@@ -87,6 +88,8 @@
     <script>scripts\scr_paused.gml</script>
     <script>scripts\scr_check_gamepad.gml</script>
     <script>scripts\scr_parse_controls_text.gml</script>
+    <script>scripts\scr_room_goto.gml</script>
+    <script>scripts\scr_fading.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shad_white.shader</shader>
@@ -107,6 +110,7 @@
       <object>objects\obj_afterimage</object>
       <object>objects\obj_end_player</object>
       <object>objects\obj_whip</object>
+      <object>objects\obj_spark</object>
     </objects>
     <objects name="enemies">
       <object>objects\obj_enemy</object>
@@ -133,7 +137,7 @@
     <object>objects\obj_end</object>
     <object>objects\obj_controls</object>
     <object>objects\obj_audio</object>
-    <object>objects\obj_spark</object>
+    <object>objects\obj_fader</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_init</room>

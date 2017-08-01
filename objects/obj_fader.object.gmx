@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1000000</depth>
   <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -25,61 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>step_mod = 0.6;
-
-sound_list = ds_list_create();
-ds_list_add(sound_list,
-    snd_jump,
-    snd_land,
-    snd_hook,
-    snd_hook_hit,
-    snd_whip,
-    snd_shoot,
-    snd_bullet_hit,
-    snd_dash,
-    snd_step,
-    snd_door_open,
-    snd_select,
-    snd_confirm,
-    snd_end,
-    snd_hurt,
-    snd_die,
-    snd_enemy_hit,
-    snd_enemy_die,
-    snd_dive,
-    snd_cancel,
-    snd_error,
-    snd_enter
-);
-
-music_list = ds_list_create();
-ds_list_add(music_list,
-    mus_main,
-    mus_sacrifice,
-    mus_menu
-);
-
-ini_open("ss_data")
-sound_on = ini_read_real("Settings", "sound", true);
-music_on = ini_read_real("Settings", "music", true);
-ini_close();
-
-var sound_gain = 0;
-if (sound_on)
-    sound_gain = 1;
-scr_set_list_gain(sound_list, sound_gain);
-audio_sound_gain(snd_step, sound_gain * step_mod, 0);
-
-var music_gain = 0;
-if (music_on)
-    music_gain = 1;
-scr_set_list_gain(music_list, music_gain);
+            <string>fade = false;
+alpha = 0;
+room_dest = -1;
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="11">
+    <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -96,21 +50,24 @@ scr_set_list_gain(music_list, music_gain);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>music_on = !music_on;
-var gain = 0;
-if (music_on)
-    gain = 1;
-scr_set_list_gain(music_list, gain);
-
-ini_open("ss_data");
-ini_write_real("Settings", "music", music_on);
-ini_close();
+            <string>if (fade) {
+    alpha += 0.1;
+    if (alpha &gt;= 1) {
+        fade = false;
+        room_goto(room_dest);
+    }
+}
+else {
+    alpha -= 0.1;
+    if (alpha &lt; 0)
+        alpha = 0;
+}
 </string>
           </argument>
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="10">
+    <event eventtype="8" enumb="0">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -127,16 +84,22 @@ ini_close();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>sound_on = !sound_on;
-var gain = 0;
-if (sound_on)
-    gain = 1;
-scr_set_list_gain(sound_list, gain);
-audio_sound_gain(snd_step, gain * step_mod, 0);
+            <string>draw_set_color(c_black);
+draw_set_alpha(alpha);
+draw_rectangle(view_xview[0], view_yview[0], view_xview[0] + view_wview[0], view_yview[0] + view_hview[0], false);
 
-ini_open("ss_data");
-ini_write_real("Settings", "sound", sound_on);
-ini_close();
+if (instance_exists(obj_control)) {
+    draw_set_color(c_white);
+    draw_set_font(fnt_item);
+    draw_set_halign(fa_middle);
+    draw_set_valign(fa_center);
+    
+    draw_set_alpha(obj_control.sac_msg);
+    
+    draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2, obj_control.sac_name + " Sacrificed##" + string(obj_control.sacrifices) + "/7 Sacrifices Made");
+}
+
+draw_set_alpha(1);
 </string>
           </argument>
         </arguments>

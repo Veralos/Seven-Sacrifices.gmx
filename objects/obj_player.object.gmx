@@ -108,15 +108,15 @@ move_contact_solid(270, 8);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (!obj_control.paused) {
-    var left_held = false;
-    var right_held = false;
-    var jump_pressed = false;
-    var jump_released = false;
-    var whip_pressed = false;
-    var shoot_pressed = false;
-    var hook_pressed = false;
+            <string>var left_held = false;
+var right_held = false;
+var jump_pressed = false;
+var jump_released = false;
+var whip_pressed = false;
+var shoot_pressed = false;
+var hook_pressed = false;
     
+if (!scr_fading()) {
     left_held = keyboard_check(vk_left) || obj_controls.leftstick_left_held;
     right_held = keyboard_check(vk_right) || obj_controls.leftstick_right_held;
     jump_pressed = keyboard_check_pressed(vk_up) || gamepad_button_check_pressed(0, gp_face1);
@@ -124,7 +124,9 @@ move_contact_solid(270, 8);
     whip_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face3);
     shoot_pressed = keyboard_check_pressed(ord('S')) || gamepad_button_check_pressed(0, gp_face2);
     hook_pressed = keyboard_check_pressed(ord('D')) || gamepad_button_check_pressed(0, gp_face4);
-    
+}
+
+if (!obj_control.paused) {
     inv--;
     if (inv &lt; 0)
         inv = 0;

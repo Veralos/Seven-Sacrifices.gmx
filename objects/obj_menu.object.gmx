@@ -94,10 +94,12 @@ var quit_pressed = false;
 var up_pressed = false;
 var down_pressed = false;
 
-start_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
-quit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
-up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed;
-down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed;
+if (!scr_fading()) {
+    start_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
+    quit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
+    up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed;
+    down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed;
+}
 
 if (up_pressed) {
     if (selected &gt; 0) {
@@ -118,7 +120,7 @@ if (start_pressed) {
             audio_play_sound(snd_confirm, 0, false);
             control = instance_create(0, 0, obj_control);
             control.item_list = base_item_list;
-            room_goto_next();
+            scr_room_goto(room_next(room));
             break;
         case 1:
             if (ds_list_size(item_list) &lt; ds_list_size(base_item_list)) {
@@ -126,7 +128,7 @@ if (start_pressed) {
                 audio_play_sound(snd_confirm, 0, false);
                 control = instance_create(0, 0, obj_control);
                 control.item_list = item_list;
-                room_goto(ds_list_find_value(room_list, ds_list_size(room_list) - (ds_list_size(item_list) + 1)));
+                scr_room_goto(ds_list_find_value(room_list, ds_list_size(room_list) - (ds_list_size(item_list) + 1)));
             }
             else
                 audio_play_sound(snd_error, 0, false);
