@@ -59,8 +59,8 @@ ds_list_add(music_list,
 );
 
 ini_open("ss_data")
-sound_on = ini_read_real("Settings", "Sound", true);
-music_on = ini_read_real("Settings", "Music", true);
+sound_on = ini_read_real("Settings", "sound", true);
+music_on = ini_read_real("Settings", "music", true);
 ini_close();
 
 var sound_gain = 0;
@@ -102,7 +102,7 @@ if (music_on)
 scr_set_list_gain(music_list, gain);
 
 ini_open("ss_data");
-ini_write_real("Settings", "Music", music_on);
+ini_write_real("Settings", "music", music_on);
 ini_close();
 </string>
           </argument>
@@ -134,7 +134,7 @@ scr_set_list_gain(sound_list, gain);
 audio_sound_gain(snd_step, gain * step_mod, 0);
 
 ini_open("ss_data");
-ini_write_real("Settings", "Sound", sound_on);
+ini_write_real("Settings", "sound", sound_on);
 ini_close();
 </string>
           </argument>

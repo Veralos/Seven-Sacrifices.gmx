@@ -36,7 +36,7 @@ for (var i = 0; i &lt; 6; i++)
     ds_list_add(item_list, i);
     
 item_title_list = ds_list_create();
-ds_list_add(item_title_list, "Lantern", "Whip", "Gun", "Grappling Hook", "Dash Boots", "Amulet");
+ds_list_add(item_title_list, "Lantern", "Whip", "Gun", "Grappling Hook", "Dash Boots", "Amulet", "Your Life");
 
 item_desc_list = ds_list_create();
 ds_list_add(item_desc_list, 
@@ -45,7 +45,8 @@ ds_list_add(item_desc_list,
     "Provides a weak long range attack", 
     "Can attach to ceilings", 
     "Provides an air dash ability", 
-    "Allows you to take an extra hit"
+    "Allows you to take an extra hit",
+    "There's only one thing you have left to sacrifice..."
 );    
 
 sacrifice = false;
@@ -137,19 +138,18 @@ if (sacrifice) {
         }
         else {
             ds_list_delete(item_list, selected);
-            ds_list_delete(item_title_list, selected);
-            ds_list_delete(item_desc_list, selected);
+            //ds_list_delete(item_title_list, selected);
+            //ds_list_delete(item_desc_list, selected);
+            
+            ini_open("ss_data");
+            ini_write_string("Save", "items", ds_list_write(item_list));
+            ini_close();
+            
             selected = 0;
             with (obj_door)
                 event_user(0);
             sacrifice = false;
             obj_altar.burn = true;
-            
-            if (ds_list_empty(item_list)) {
-                ds_list_add(item_list, 6);
-                ds_list_add(item_title_list, "Your Life");
-                ds_list_add(item_desc_list, "There's only one thing you have left to sacrifice...");
-            }
         }
     }
 }
@@ -217,6 +217,9 @@ if (paused) {
             <string>if (!audio_is_playing(mus_main))
     audio_play_sound(mus_main, 1, true);
     
+if (ds_list_empty(item_list))
+    ds_list_add(item_list, 6);
+    
 room_speed = 60;
 instance_create(0, 0, obj_dark);
 instance_create(0, 0, obj_background);
@@ -273,16 +276,18 @@ instance_create(0, 0, obj_background);
     }
     draw_sprite(spr_selector, 0, view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2);
     
+    var item = ds_list_find_value(item_list, selected);
+    
     draw_set_color(c_white);
     draw_set_font(fnt_item);
     draw_set_halign(fa_middle);
     draw_set_valign(fa_center);
     
-    draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2 + 48, ds_list_find_value(item_title_list, selected));
+    draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2 + 48, ds_list_find_value(item_title_list, item));
     
     draw_set_font(fnt_desc);
     
-    draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2 + 80, ds_list_find_value(item_desc_list, selected));
+    draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2 + 80, ds_list_find_value(item_desc_list, item));
     
     draw_text(view_xview[0] + view_wview[0] / 2, view_yview[0] + view_hview[0] / 2 + 110, "Left/Right to select - A to confirm");
     
