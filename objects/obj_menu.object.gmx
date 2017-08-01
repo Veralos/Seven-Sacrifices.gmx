@@ -29,6 +29,19 @@
 audio_stop_sound(mus_sacrifice);
 audio_play_sound(mus_menu, 1, true);
 
+base_item_list = ds_list_create();
+for (var i = 0; i &lt; 6; i++)
+    ds_list_add(base_item_list, i);
+
+var item_list_string = ds_list_write(base_item_list);
+    
+ini_open("ss_data");
+item_list_string = ini_read_string("Save", "items", item_list_string);
+ini_close();
+
+item_list = ds_list_create();
+ds_list_read(item_list, item_list_string);
+
 selected = 0;
 options_list = ds_list_create();
 ds_list_add(options_list,
@@ -38,6 +51,17 @@ ds_list_add(options_list,
     "Sound",
     "Music",
     "Quit"
+);
+
+room_list = ds_list_create();
+ds_list_add(room_list,
+    rm_tutorial,
+    rm_short,
+    rm_basic,
+    rm_spider,
+    rm_tower,
+    rm_long,
+    rm_final
 );
 </string>
           </argument>
@@ -88,8 +112,16 @@ if (start_pressed) {
         case 0:
             audio_stop_sound(mus_menu);
             audio_play_sound(snd_confirm, 0, false);
-            instance_create(0, 0, obj_control);
+            control = instance_create(0, 0, obj_control);
+            control.item_list = base_item_list;
             room_goto_next();
+            break;
+        case 1:
+            audio_stop_sound(mus_menu);
+            audio_play_sound(snd_confirm, 0, false);
+            control = instance_create(0, 0, obj_control);
+            control.item_list = item_list;
+            room_goto(ds_list_find_value(room_list, ds_list_size(room_list) - (ds_list_size(item_list) + 1)));
             break;
         case 2:
             audio_play_sound(snd_confirm, 0, false);

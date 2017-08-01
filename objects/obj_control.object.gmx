@@ -31,9 +31,12 @@ ds_list_add(pause_list, "Continue", "Quit");
 paused = false;
 pause_selected = 0;
 
-item_list = ds_list_create();
+//item_list = ds_list_create();
+//ds_list_copy(item_list, obj_menu.item_list);
+
+/*item_list = ds_list_create();
 for (var i = 0; i &lt; 6; i++)
-    ds_list_add(item_list, i);
+    ds_list_add(item_list, i);*/
     
 item_title_list = ds_list_create();
 ds_list_add(item_title_list, "Lantern", "Whip", "Gun", "Grappling Hook", "Dash Boots", "Amulet", "Your Life");
@@ -47,7 +50,7 @@ ds_list_add(item_desc_list,
     "Provides an air dash ability", 
     "Allows you to take an extra hit",
     "There's only one thing you have left to sacrifice..."
-);    
+);
 
 sacrifice = false;
 selected = 0;
@@ -129,7 +132,6 @@ if (sacrifice) {
     if (confirm_pressed) {
         audio_stop_sound(mus_sacrifice);
         audio_play_sound(snd_confirm, 0, false);
-        sacrifices++;
         sac_msg = 2;
         sac_name = ds_list_find_value(item_title_list, selected);
         if (ds_list_find_value(item_list, selected) == 6) {
@@ -138,8 +140,8 @@ if (sacrifice) {
         }
         else {
             ds_list_delete(item_list, selected);
-            //ds_list_delete(item_title_list, selected);
-            //ds_list_delete(item_desc_list, selected);
+            
+            sacrifices = 6 - ds_list_size(item_list);
             
             ini_open("ss_data");
             ini_write_string("Save", "items", ds_list_write(item_list));
