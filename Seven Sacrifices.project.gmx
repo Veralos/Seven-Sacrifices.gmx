@@ -53,9 +53,11 @@
       <sprite>sprites\spr_skeleton</sprite>
       <sprite>sprites\spr_skeleton_dead</sprite>
       <sprite>sprites\spr_spider</sprite>
+      <sprite>sprites\spr_spider2</sprite>
       <sprite>sprites\spr_spider_dead</sprite>
       <sprite>sprites\spr_bat</sprite>
       <sprite>sprites\spr_bat_dive</sprite>
+      <sprite>sprites\spr_bat_dead</sprite>
       <sprite>sprites\spr_crate</sprite>
       <sprite>sprites\spr_crate_part</sprite>
     </sprites>
