@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>event_inherited();
 
-hp = 3;
+hp = 2;
 dead_sprite = spr_spider_dead;
 
 dir = 0;

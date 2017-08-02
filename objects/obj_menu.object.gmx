@@ -97,8 +97,8 @@ var down_pressed = false;
 if (!scr_fading()) {
     start_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
     quit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
-    up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed;
-    down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed;
+    up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed || gamepad_button_check_pressed(0, gp_padu);
+    down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed || gamepad_button_check_pressed(0, gp_padd);
 }
 
 if (up_pressed) {

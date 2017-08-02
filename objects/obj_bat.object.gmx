@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>event_inherited();
 
-hp = 2;
+hp = 1;
 dead_sprite = spr_bat_dead;
 
 dir = 1;

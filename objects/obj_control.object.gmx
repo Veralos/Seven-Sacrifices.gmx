@@ -110,10 +110,10 @@ var confirm_pressed = false;
 var exit_pressed = false;
 
 if (!scr_fading()) {
-    left_pressed = keyboard_check_pressed(vk_left) || obj_controls.leftstick_left_pressed;
-    right_pressed = keyboard_check_pressed(vk_right) || obj_controls.leftstick_right_pressed;
-    up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed;
-    down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed;
+    left_pressed = keyboard_check_pressed(vk_left) || obj_controls.leftstick_left_pressed || gamepad_button_check_pressed(0, gp_padl);
+    right_pressed = keyboard_check_pressed(vk_right) || obj_controls.leftstick_right_pressed || gamepad_button_check_pressed(0, gp_padr);
+    up_pressed = keyboard_check_pressed(vk_up) || obj_controls.leftstick_up_pressed || gamepad_button_check_pressed(0, gp_padu);
+    down_pressed = keyboard_check_pressed(vk_down) || obj_controls.leftstick_down_pressed || gamepad_button_check_pressed(0, gp_padd);
     confirm_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face1);
     exit_pressed = keyboard_check_pressed(vk_escape) || gamepad_button_check_pressed(0, gp_start);
 }

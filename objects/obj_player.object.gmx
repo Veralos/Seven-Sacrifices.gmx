@@ -117,8 +117,8 @@ var shoot_pressed = false;
 var hook_pressed = false;
     
 if (!scr_fading()) {
-    left_held = keyboard_check(vk_left) || obj_controls.leftstick_left_held;
-    right_held = keyboard_check(vk_right) || obj_controls.leftstick_right_held;
+    left_held = keyboard_check(vk_left) || obj_controls.leftstick_left_held || gamepad_button_check(0, gp_padl);
+    right_held = keyboard_check(vk_right) || obj_controls.leftstick_right_held || gamepad_button_check(0, gp_padr);
     jump_pressed = keyboard_check_pressed(vk_up) || gamepad_button_check_pressed(0, gp_face1);
     jump_released = keyboard_check_released(vk_up) || gamepad_button_check_released(0, gp_face1);
     whip_pressed = keyboard_check_pressed(ord('A')) || gamepad_button_check_pressed(0, gp_face3);
