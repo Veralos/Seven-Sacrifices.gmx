@@ -63,6 +63,10 @@
     
     with (obj_light)
         draw_circle(x - view_xview[0], y - view_yview[0], 50 + random(rand), false);
+    with (obj_altar) {
+        draw_circle(x - 10 - view_xview[0], y - view_yview[0], 50 + random(rand), false);
+        draw_circle(x + 10 - view_xview[0], y - view_yview[0], 50 + random(rand), false);
+    }
     with (obj_player) {
         var rad = 60;
         if (scr_check_item("Lantern"))
